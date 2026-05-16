@@ -745,7 +745,7 @@
     <div class="tab-nav">
       <button class="tab-btn active" data-tab="ujiminda">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
-             stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+         stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
           <path d="M12 2L2 7l10 5 10-5-10-5z"/>
           <path d="M2 17l10 5 10-5"/>
           <path d="M2 12l10 5 10-5"/>
@@ -754,7 +754,7 @@
       </button>
       <button class="tab-btn" data-tab="ranking">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none"
-             stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+         stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
           <path d="M6 9H4.5a2.5 2.5 0 0 0 0 5H6"/>
           <path d="M18 9h1.5a2.5 2.5 0 0 1 0 5H18"/>
           <path d="M4 22h16"/>
@@ -796,6 +796,13 @@
   document.addEventListener("DOMContentLoaded", function() {
     const selKelas = document.getElementById('selKelas');
     const selPelajar = document.getElementById('selPelajar');
+    const btnMasuk = document.getElementById('btnMasuk');
+    const loginScreen = document.getElementById('loginScreen');
+    const welcomeSection = document.getElementById('welcomeSection');
+    const namaPelajar = document.getElementById('namaPelajar');
+    const kelasPelajar = document.getElementById('kelasPelajar');
+    const avatarWrap = document.getElementById('avatarWrap');
+    const btnKeluar = document.getElementById('btnKeluar');
 
     // Semakan keselamatan jika KELAS_DATA gagal diakses
     if (typeof KELAS_DATA === 'undefined') {
@@ -840,6 +847,55 @@
         });
       }
     });
+
+    // ⚡️ LOGIK TERBARU: Tindak balas klik butang Masuk (Log Masuk)
+    btnMasuk.addEventListener('click', function() {
+      const kelasDipilih = selKelas.value;
+      const pelajarDipilih = selPelajar.value;
+
+      // Had sekat jika pengguna belum lengkapkan pilihan dropdown
+      if (kelasDipilih === "" || pelajarDipilih === "") {
+        alert("Sila pilih Kelas dan Nama Pelajar terlebih dahulu sebelum masuk!");
+        return;
+      }
+
+      // 1. Kemas kini maklumat teks nama dan kelas pada paparan dashboard
+      if (typeof formatNama === 'function') {
+        namaPelajar.textContent = formatNama(pelajarDipilih);
+      } else {
+        namaPelajar.textContent = pelajarDipilih;
+      }
+      kelasPelajar.textContent = kelasDipilih;
+
+      // 2. Papar imej avatar automatik (kopiah/hijab) berasaskan jantina dari data.js
+      if (typeof getAvatar === 'function') {
+        avatarWrap.innerHTML = getAvatar(pelajarDipilih);
+      } else {
+        avatarWrap.innerHTML = "👤"; // Sandaran jika fungsi bermasalah
+      }
+
+      // 3. Ubah visual: Sembunyikan skrin daftar, tunjukkan dashboard utama
+      loginScreen.style.display = 'none';
+      welcomeSection.style.display = 'block';
+      
+      // 4. Aktifkan butang keluar di penjuru kanan header
+      if (btnKeluar) btnKeluar.style.display = 'flex';
+    });
+
+    // ⚡️ LOGIK TERBARU: Tindak balas klik butang Keluar (Log Keluar)
+    if (btnKeluar) {
+      btnKeluar.addEventListener('click', function() {
+        // Kosongkan semula data pilihan borang lama
+        selKelas.value = "";
+        selPelajar.innerHTML = '<option value="">— Pilih Kelas Dahulu —</option>';
+        selPelajar.disabled = true;
+
+        // Tukar visual paparan kembali ke skrin login asal
+        loginScreen.style.display = 'flex';
+        welcomeSection.style.display = 'none';
+        btnKeluar.style.display = 'none';
+      });
+    }
   });
 </script>
 <script src="js/app.js"></script>
