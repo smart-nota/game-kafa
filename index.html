@@ -11,7 +11,7 @@
 
   <style>
   /* ════════════════════════════════════════════
-     RESET & VARIABLES
+      RESET & VARIABLES
   ════════════════════════════════════════════ */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -101,7 +101,7 @@
   }
 
   /* ════════════════════════════════════════════
-     HEADER
+      HEADER
   ════════════════════════════════════════════ */
   #mainHeader {
     position: sticky; top: 0; z-index: 100;
@@ -177,9 +177,9 @@
   }
 
   /* ════════════════════════════════════════════
-     COFFEE BTN — FIXED BOTTOM RIGHT
-     auto-hide: body.game-active → hidden
-     auto-show: class removed → visible
+      COFFEE BTN — FIXED BOTTOM RIGHT
+      auto-hide: body.game-active → hidden
+      auto-show: class removed → visible
   ════════════════════════════════════════════ */
   .support-btn-wrapper {
     position: fixed;
@@ -244,7 +244,7 @@
   .cup-body   { fill: rgba(255,255,255,.92); stroke: none; }
 
   /* ════════════════════════════════════════════
-     MAIN
+      MAIN
   ════════════════════════════════════════════ */
   main {
     position: relative; z-index: 1;
@@ -252,7 +252,7 @@
   }
 
   /* ════════════════════════════════════════════
-     LOGIN SCREEN
+      LOGIN SCREEN
   ════════════════════════════════════════════ */
   #loginScreen {
     display: flex; align-items: center; justify-content: center;
@@ -376,7 +376,7 @@
   .btn-masuk:active { transform: translateY(0); }
 
   /* ════════════════════════════════════════════
-     DASHBOARD
+      DASHBOARD
   ════════════════════════════════════════════ */
   #welcomeSection {
     display: none;
@@ -558,7 +558,7 @@
   .empty-state p { font-size: 14px; font-weight: 500; }
 
   /* ════════════════════════════════════════════
-     RANKING TABLE
+      RANKING TABLE
   ════════════════════════════════════════════ */
   .ranking-table-wrap {
     overflow-x: auto; border-radius: var(--radius);
@@ -606,7 +606,7 @@
   .rank-3 { background: rgba(180,110,70,.22);  color: #d49070; }
 
   /* ════════════════════════════════════════════
-     TOAST
+      TOAST
   ════════════════════════════════════════════ */
   .toast {
     position: fixed;
@@ -626,7 +626,7 @@
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
   /* ════════════════════════════════════════════
-     ANIMATIONS
+      ANIMATIONS
   ════════════════════════════════════════════ */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(18px); }
@@ -634,7 +634,7 @@
   }
 
   /* ════════════════════════════════════════════
-     RESPONSIVE
+      RESPONSIVE
   ════════════════════════════════════════════ */
   @media (max-width: 500px) {
     .login-card    { padding: 30px 18px 26px; border-radius: var(--radius-lg); }
@@ -669,9 +669,6 @@
 </head>
 <body>
 
-<!-- ════════════════════════════════════════
-     HEADER
-═════════════════════════════════════════ -->
 <header id="mainHeader">
   <a class="header-logo" href="#">
     <div class="logo-icon">🌙</div>
@@ -689,11 +686,6 @@
   </button>
 </header>
 
-<!-- ════════════════════════════════════════
-     COFFEE BTN — FIXED BOTTOM RIGHT
-     Hides via body.game-active (set in app.js
-     when navigating to game page)
-═════════════════════════════════════════ -->
 <div class="support-btn-wrapper" id="coffeeBtnWrap">
   <div class="coffee-bubble">Suka web ini?<br>Jom belanja saya kopi! ☕</div>
   <a href="https://smart-nota.github.io/nota-digital/sokong-saya.html"
@@ -709,12 +701,8 @@
   </a>
 </div>
 
-<!-- ════════════════════════════════════════
-     MAIN
-═════════════════════════════════════════ -->
 <main>
 
-  <!-- ── LOGIN SCREEN ── -->
   <section id="loginScreen">
     <div class="login-card">
       <div class="login-logo">
@@ -725,74 +713,24 @@
 
       <div class="login-divider"></div>
 
-<div class="form-group">
-  <label for="selKelas">📚 Pilih Kelas</label>
-  <select id="selKelas">
-    <option value="">— Pilih Kelas —</option>
-  </select>
-</div>
+      <div class="form-group">
+        <label for="selKelas">📚 Pilih Kelas</label>
+        <select id="selKelas">
+          <option value="">— Pilih Kelas —</option>
+        </select>
+      </div>
 
-<div class="form-group">
-  <label for="selPelajar">👤 Pilih Nama Pelajar</label>
-  <select id="selPelajar" disabled>
-    <option value="">— Pilih Kelas Dahulu —</option>
-  </select>
-</div>
-
-<script src="data.js"></script>
-
-      <script>
-  // 1. Ambil elemen HTML berdasarkan ID yang betul
-  const selKelas = document.getElementById('selKelas');
-  const selPelajar = document.getElementById('selPelajar');
-
-  // 2. Masukkan senarai kelas dari KELAS_DATA ke dalam dropdown Kelas
-  // KELAS_DATA datang daripada fail data.js
-  for (const kelas in KELAS_DATA) {
-    const option = document.createElement('option');
-    option.value = kelas;
-    option.textContent = kelas;
-    selKelas.appendChild(option);
-  }
-
-  // 3. Sentiasa dengar perubahan (event listener) apabila pengguna memilih kelas
-  selKelas.addEventListener('change', function() {
-    const kelasDipilih = this.value;
-
-    // Kosongkan dropdown pelajar terdahulu
-    selPelajar.innerHTML = '<option value="">— Pilih Nama Pelajar —</option>';
-
-    if (kelasDipilih === "") {
-      // Jika pilih kembali teks kosong, sekatkan dropdown pelajar
-      selPelajar.disabled = true;
-      selPelajar.innerHTML = '<option value="">— Pilih Kelas Dahulu —</option>';
-    } else {
-      // Aktifkan dropdown pelajar jika kelas telah dipilih
-      selPelajar.disabled = false;
-
-      // Ambil senarai pelajar bagi kelas yang dipilih
-      const senaraiPelajar = KELAS_DATA[kelasDipilih];
-
-      // Masukkan nama pelajar ke dalam dropdown
-      senaraiPelajar.forEach(function(pelajar) {
-        const option = document.createElement('option');
-        option.value = pelajar;
-        
-        // Menggunakan fungsi formatNama(nama) yang sedia ada dalam data.js anda 
-        // supaya nama keluar lebih kemas (bukan semua huruf besar)
-        option.textContent = formatNama(pelajar); 
-        
-        selPelajar.appendChild(option);
-      });
-    }
-  });
-</script>
+      <div class="form-group">
+        <label for="selPelajar">👤 Pilih Nama Pelajar</label>
+        <select id="selPelajar" disabled>
+          <option value="">— Pilih Kelas Dahulu —</option>
+        </select>
+      </div>
 
       <button class="btn-masuk" id="btnMasuk">Masuk &rarr;</button>
     </div>
   </section>
 
-  <!-- ── DASHBOARD ── -->
   <section id="welcomeSection">
 
     <div class="welcome-card">
@@ -826,7 +764,6 @@
       </button>
     </div>
 
-    <!-- TAB: UJI MINDA -->
     <div class="tab-content active" id="tabUjiminda">
       <div class="selector-row" id="ujimindaSubjekRow"></div>
       <div class="topic-grid" id="tajukGrid">
@@ -837,7 +774,6 @@
       </div>
     </div>
 
-    <!-- TAB: RANKING -->
     <div class="tab-content" id="tabRanking">
       <div class="selector-row" id="rankingSubjekRow"></div>
       <div class="selector-row" id="rankingTajukRow" style="margin-top:-4px"></div>
@@ -853,14 +789,59 @@
 
 </main>
 
-<!-- Toast -->
 <div class="toast" id="toast"></div>
 
-<!-- ════════════════════════════════════════
-     SCRIPTS
-     Urutan penting: data.js MESTI dulu
-═════════════════════════════════════════ -->
 <script src="js/data.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const selKelas = document.getElementById('selKelas');
+    const selPelajar = document.getElementById('selPelajar');
+
+    // Semakan keselamatan jika KELAS_DATA gagal diakses
+    if (typeof KELAS_DATA === 'undefined') {
+      console.error("Fail data.js tidak dijumpai atau KELAS_DATA gagal dibaca.");
+      return;
+    }
+
+    // Masukkan senarai kelas dari KELAS_DATA ke dalam dropdown Kelas
+    for (const kelas in KELAS_DATA) {
+      const option = document.createElement('option');
+      option.value = kelas;
+      option.textContent = kelas;
+      selKelas.appendChild(option);
+    }
+
+    // Event listener apabila pilihan kelas berubah
+    selKelas.addEventListener('change', function() {
+      const kelasDipilih = this.value;
+
+      // Reset dropdown pelajar
+      selPelajar.innerHTML = '<option value="">— Pilih Nama Pelajar —</option>';
+
+      if (kelasDipilih === "") {
+        selPelajar.disabled = true;
+        selPelajar.innerHTML = '<option value="">— Pilih Kelas Dahulu —</option>';
+      } else {
+        selPelajar.disabled = false;
+        const senaraiPelajar = KELAS_DATA[kelasDipilih];
+
+        senaraiPelajar.forEach(function(pelajar) {
+          const option = document.createElement('option');
+          option.value = pelajar;
+          
+          // Guna formatNama() dari data.js untuk kekemasan teks nama
+          if (typeof formatNama === 'function') {
+            option.textContent = formatNama(pelajar);
+          } else {
+            option.textContent = pelajar;
+          }
+          
+          selPelajar.appendChild(option);
+        });
+      }
+    });
+  });
+</script>
 <script src="js/app.js"></script>
 </body>
 </html>
