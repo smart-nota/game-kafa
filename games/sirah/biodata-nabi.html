@@ -49,6 +49,455 @@
       0%,100% { transform: translateY(0); opacity: 0.9; }
       50%      { transform: translateY(-6px); opacity: 0.4; }
     }
+
+    /* ══════════════════════════════════════════
+       BUTANG PREMIUM — Cuba Semula & Hantar
+    ══════════════════════════════════════════ */
+    .final-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    /* Butang Cuba Semula */
+    .btn-cuba-semula {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 15px 18px;
+      background: #f8faff;
+      border: 2px solid #dde6f7;
+      border-radius: 14px;
+      font-family: 'Baloo 2', 'Nunito', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #1a3c5e;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(.4,0,.2,1);
+      letter-spacing: 0.2px;
+      overflow: hidden;
+      text-align: left;
+    }
+    .btn-cuba-semula::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(37,99,168,0.07), transparent);
+      opacity: 0; transition: opacity 0.25s;
+    }
+    .btn-cuba-semula:hover {
+      border-color: #2563a8;
+      background: #eef3ff;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(26,60,94,0.12);
+    }
+    .btn-cuba-semula:hover::after { opacity: 1; }
+    .btn-cuba-semula:active { transform: translateY(0); }
+
+    .cuba-icon {
+      font-size: 1.3rem; line-height: 1; flex-shrink: 0;
+    }
+    .cuba-text { flex: 1; }
+    .cuba-text small {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #64748b;
+      margin-top: 1px;
+    }
+    .cuba-badge {
+      background: linear-gradient(135deg, #f59e0b, #fbbf24);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.3px;
+      box-shadow: 0 2px 8px rgba(245,158,11,0.28);
+      flex-shrink: 0;
+    }
+
+    /* Butang Hantar Markah */
+    .btn-hantar-markah {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 15px 18px;
+      background: linear-gradient(135deg, #059669 0%, #10b981 60%, #34d399 100%);
+      border: none;
+      border-radius: 14px;
+      font-family: 'Baloo 2', 'Nunito', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: #ffffff;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(.4,0,.2,1);
+      letter-spacing: 0.3px;
+      box-shadow: 0 4px 18px rgba(16,185,129,0.38);
+      overflow: hidden;
+      text-align: left;
+    }
+    /* Shimmer effect */
+    .btn-hantar-markah::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 60%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.20), transparent);
+      transition: left 0.6s ease;
+    }
+    .btn-hantar-markah:hover::before { left: 160%; }
+    /* Gloss overlay */
+    .btn-hantar-markah::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.14) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .btn-hantar-markah:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(16,185,129,0.48);
+      filter: brightness(1.05);
+    }
+    .btn-hantar-markah:active { transform: translateY(0); }
+
+    .hantar-icon { font-size: 1.3rem; line-height: 1; flex-shrink: 0; }
+    .hantar-text { flex: 1; }
+    .hantar-text small {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      opacity: 0.80;
+      margin-top: 1px;
+    }
+    .hantar-arrow {
+      font-size: 1.2rem;
+      transition: transform 0.25s;
+      flex-shrink: 0;
+    }
+    .btn-hantar-markah:hover .hantar-arrow { transform: translateX(5px); }
+
+    /* ══════════════════════════════════════════
+       MODAL OVERLAY (dikongsi)
+    ══════════════════════════════════════════ */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(6, 14, 30, 0.70);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: 2000;
+      display: flex; align-items: center; justify-content: center;
+      padding: 16px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .modal-overlay.show {
+      opacity: 1; pointer-events: all;
+    }
+
+    /* ══════════════════════════════════════════
+       MODAL 1 — KAD PENGESAHAN HANTAR
+    ══════════════════════════════════════════ */
+    .modal-konfirm-box {
+      background: #ffffff;
+      border-radius: 24px;
+      width: 100%; max-width: 370px;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.24), 0 0 0 1px rgba(255,255,255,0.9);
+      transform: scale(0.88) translateY(28px);
+      transition: transform 0.38s cubic-bezier(.34,1.56,.64,1);
+      overflow: hidden; position: relative;
+    }
+    .modal-overlay.show .modal-konfirm-box,
+    .modal-overlay.show .modal-berjaya-box {
+      transform: scale(1) translateY(0);
+    }
+    /* Bar warna atas */
+    .modal-konfirm-box::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, #059669, #10b981, #6ee7b7, #34d399);
+    }
+
+    .modal-konfirm-body {
+      padding: 32px 26px 0;
+      text-align: center;
+    }
+
+    .modal-icon-ring {
+      width: 76px; height: 76px;
+      margin: 0 auto 18px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+      border: 2px solid #6ee7b7;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.4rem;
+      position: relative;
+    }
+    .modal-icon-ring::after {
+      content: '';
+      position: absolute; inset: -5px;
+      border-radius: 27px;
+      border: 2px solid rgba(16,185,129,0.18);
+      animation: pulseRing 2.2s ease-in-out infinite;
+    }
+    @keyframes pulseRing {
+      0%,100% { transform: scale(1); opacity: 0.7; }
+      50%      { transform: scale(1.07); opacity: 0.15; }
+    }
+
+    .modal-konfirm-title {
+      font-family: 'Baloo 2', sans-serif;
+      font-size: 1.15rem; font-weight: 900;
+      color: #0f172a; margin-bottom: 7px; line-height: 1.3;
+    }
+    .modal-konfirm-desc {
+      font-family: 'Baloo 2', sans-serif;
+      font-size: 0.85rem; color: #64748b;
+      line-height: 1.65; margin-bottom: 20px;
+    }
+    .modal-konfirm-desc strong { color: #0f172a; }
+
+    /* Score chip */
+    .modal-score-chip {
+      display: flex; align-items: center; gap: 14px;
+      background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+      border: 1.5px solid #bbf7d0;
+      border-radius: 16px;
+      padding: 16px 20px;
+      margin: 0 0 14px;
+      text-align: left;
+    }
+    .chip-left { flex: 1; }
+    .chip-label {
+      font-family: 'Baloo 2', sans-serif;
+      font-size: 0.68rem; font-weight: 700;
+      color: #059669; text-transform: uppercase; letter-spacing: 0.9px;
+      margin-bottom: 3px;
+    }
+    .chip-markah {
+      font-family: 'Baloo 2', sans-serif;
+      font-size: 2.3rem; font-weight: 900;
+      color: #064e3b; line-height: 1; letter-spacing: -1px;
+    }
+    .chip-markah sub {
+      font-size: 0.95rem; font-weight: 600;
+      color: #34d399; vertical-align: baseline; margin-left: 2px;
+    }
+    .chip-icon { font-size: 2.4rem; line-height: 1; }
+
+    /* Warning strip */
+    .modal-warning-strip {
+      display: flex; align-items: flex-start; gap: 8px;
+      background: #fffbeb;
+      border: 1.5px solid #fde68a;
+      border-radius: 12px;
+      padding: 11px 14px;
+      margin: 0 0 0;
+      text-align: left;
+    }
+    .warning-icon-sm { font-size: 0.9rem; flex-shrink: 0; margin-top: 1px; }
+    .modal-warning-strip p {
+      font-family: 'Baloo 2', sans-serif;
+      font-size: 0.79rem; color: #92400e;
+      font-weight: 600; line-height: 1.55;
+    }
+
+    /* Modal action row */
+    .modal-konfirm-actions {
+      padding: 18px 26px 26px;
+      display: flex; flex-direction: column; gap: 9px;
+    }
+    .mbtn-confirm {
+      position: relative;
+      width: 100%; padding: 14px;
+      background: linear-gradient(135deg, #059669, #10b981);
+      border: none; border-radius: 12px;
+      font-family: 'Baloo 2', sans-serif;
+      font-size: 0.95rem; font-weight: 800;
+      color: #fff; cursor: pointer;
+      transition: all 0.25s;
+      box-shadow: 0 4px 16px rgba(16,185,129,0.32);
+      overflow: hidden; letter-spacing: 0.3px;
+    }
+    .mbtn-confirm::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.14), transparent 55%);
+      pointer-events: none;
+    }
+    .mbtn-confirm:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 7px 22px rgba(16,185,129,0.42);
+      filter: brightness(1.06);
+    }
+    .mbtn-confirm:active { transform: translateY(0); }
+
+    .mbtn-cancel {
+      width: 100%; padding: 13px;
+      background: transparent;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      font-family: 'Baloo 2', sans-serif;
+      font-size: 0.88rem; font-weight: 700;
+      color: #64748b; cursor: pointer;
+      transition: all 0.22s;
+    }
+    .mbtn-cancel:hover {
+      border-color: #b6c8e8; background: #f8faff; color: #1a3c5e;
+    }
+
+    /* ══════════════════════════════════════════
+       MODAL 2 — KAD BERJAYA DIHANTAR
+    ══════════════════════════════════════════ */
+    .modal-berjaya-box {
+      background: #ffffff;
+      border-radius: 24px;
+      width: 100%; max-width: 350px;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.24);
+      transform: scale(0.88) translateY(28px);
+      transition: transform 0.38s cubic-bezier(.34,1.56,.64,1);
+      overflow: hidden; position: relative;
+      text-align: center;
+    }
+    /* Bar atas */
+    .modal-berjaya-box::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, #059669, #10b981, #34d399);
+    }
+    /* Background subtil */
+    .modal-berjaya-box::after {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 160px;
+      background: radial-gradient(ellipse at 50% -10%, rgba(16,185,129,0.10), transparent 70%);
+      pointer-events: none;
+    }
+
+    .modal-berjaya-inner {
+      padding: 36px 26px 30px;
+      position: relative; z-index: 1;
+    }
+
+    .berjaya-confetti {
+      font-size: 3.8rem; line-height: 1;
+      display: block; margin-bottom: 14px;
+      animation: popBounce 0.55s cubic-bezier(.34,1.56,.64,1) both;
+    }
+    @keyframes popBounce {
+      from { transform: scale(0) rotate(-20deg); opacity: 0; }
+      to   { transform: scale(1) rotate(0); opacity: 1; }
+    }
+
+    .berjaya-title {
+      font-family: 'Baloo 2', sans-serif;
+      font-size: 1.22rem; font-weight: 900;
+      color: #064e3b; margin-bottom: 8px;
+    }
+    .berjaya-msg {
+      font-family: 'Baloo 2', sans-serif;
+      font-size: 0.85rem; color: #6b7280;
+      line-height: 1.65; margin-bottom: 22px;
+    }
+
+    /* Score pill */
+    .berjaya-score-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, #059669, #10b981);
+      color: #fff;
+      border-radius: 40px;
+      padding: 10px 26px;
+      font-family: 'Baloo 2', sans-serif;
+      font-size: 1.4rem; font-weight: 900;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 18px rgba(16,185,129,0.38);
+      letter-spacing: -0.5px;
+    }
+    .berjaya-score-pill small {
+      font-size: 0.82rem; font-weight: 600; opacity: 0.82;
+    }
+
+    /* Butang lihat ranking */
+    .btn-ke-ranking {
+      display: flex; align-items: center; justify-content: center;
+      gap: 8px; width: 100%;
+      padding: 14px 20px;
+      background: linear-gradient(135deg, #1a3c5e, #2563a8);
+      border: none; border-radius: 13px;
+      font-family: 'Baloo 2', sans-serif;
+      font-size: 0.95rem; font-weight: 800;
+      color: #fff; cursor: pointer;
+      transition: all 0.25s;
+      box-shadow: 0 4px 18px rgba(26,60,94,0.28);
+      overflow: hidden; position: relative;
+      letter-spacing: 0.2px;
+    }
+    .btn-ke-ranking::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,0.12), transparent 55%);
+      pointer-events: none;
+    }
+    .btn-ke-ranking:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 26px rgba(26,60,94,0.38);
+    }
+    .btn-ke-ranking:active { transform: translateY(0); }
+    .ranking-arrow {
+      font-size: 1.1rem;
+      transition: transform 0.25s;
+    }
+    .btn-ke-ranking:hover .ranking-arrow { transform: translateX(5px); }
+
+    /* ══════════════════════════════════════════
+       LOADING SPINNER
+    ══════════════════════════════════════════ */
+    .sending-overlay {
+      position: fixed; inset: 0;
+      background: rgba(6,14,30,0.65);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 3000;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 16px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .sending-overlay.show { opacity: 1; pointer-events: all; }
+
+    .send-spinner {
+      width: 54px; height: 54px;
+      border: 4px solid rgba(255,255,255,0.12);
+      border-top-color: #10b981;
+      border-radius: 50%;
+      animation: spinIt 0.75s linear infinite;
+    }
+    @keyframes spinIt { to { transform: rotate(360deg); } }
+
+    .send-text {
+      font-family: 'Baloo 2', sans-serif;
+      font-size: 0.95rem; font-weight: 700;
+      color: rgba(255,255,255,0.86);
+    }
+
+    /* ══════════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════════ */
+    @media (max-width: 480px) {
+      .modal-konfirm-box, .modal-berjaya-box { border-radius: 20px; }
+      .modal-konfirm-body { padding: 26px 18px 0; }
+      .modal-konfirm-actions { padding: 14px 18px 22px; }
+      .modal-berjaya-inner { padding: 28px 18px 24px; }
+      .chip-markah { font-size: 2rem; }
+      .berjaya-score-pill { font-size: 1.2rem; padding: 9px 20px; }
+      .btn-cuba-semula, .btn-hantar-markah { padding: 13px 14px; font-size: 0.88rem; }
+      .modal-icon-ring { width: 64px; height: 64px; font-size: 2rem; }
+    }
   </style>
 </head>
 <body>
@@ -99,6 +548,78 @@
   </a>
 </div>
 
+<!-- ══════════════════════════════════════════════
+     MODAL 1 — PENGESAHAN HANTAR MARKAH
+══════════════════════════════════════════════ -->
+<div class="modal-overlay" id="modalKonfirm">
+  <div class="modal-konfirm-box">
+
+    <div class="modal-konfirm-body">
+      <div class="modal-icon-ring">✅</div>
+      <div class="modal-konfirm-title">Hantar Markah?</div>
+      <div class="modal-konfirm-desc">
+        Anda pasti ingin menghantar markah ini?<br>
+        Selepas ini, <strong>permainan tidak dapat diulang.</strong>
+      </div>
+
+      <div class="modal-score-chip">
+        <div class="chip-left">
+          <div class="chip-label">Jumlah Markah Anda</div>
+          <div class="chip-markah" id="modalChipMarkah">0<sub>/ 75</sub></div>
+        </div>
+        <div class="chip-icon">🏆</div>
+      </div>
+
+      <div class="modal-warning-strip">
+        <div class="warning-icon-sm">⚠️</div>
+        <p>Markah yang dihantar akan disimpan dalam papan ranking secara kekal.</p>
+      </div>
+    </div>
+
+    <div class="modal-konfirm-actions">
+      <button class="mbtn-confirm" id="btnKonfirmYa">
+        ✅ &nbsp; Ya, Hantar Sekarang
+      </button>
+      <button class="mbtn-cancel" id="btnKonfirmTidak">
+        Batal — Kembali ke Keputusan
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     MODAL 2 — BERJAYA DIHANTAR
+══════════════════════════════════════════════ -->
+<div class="modal-overlay" id="modalBerjaya">
+  <div class="modal-berjaya-box">
+    <div class="modal-berjaya-inner">
+      <span class="berjaya-confetti">🎉</span>
+      <div class="berjaya-title">Tahniah! Markah Dihantar!</div>
+      <div class="berjaya-msg">
+        Markah anda telah berjaya disimpan<br>dalam papan ranking. Teruskan semangat! 💪
+      </div>
+      <div class="berjaya-score-pill">
+        🏆 &nbsp;<span id="berjayaMarkahNum">0</span>&nbsp;<small>/ 75</small>
+      </div>
+      <button class="btn-ke-ranking" id="btnKeRanking">
+        🏅 &nbsp; Lihat Ranking Saya &nbsp;<span class="ranking-arrow">→</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     LOADING — SEMASA MENGHANTAR
+══════════════════════════════════════════════ -->
+<div class="sending-overlay" id="sendingOverlay">
+  <div class="send-spinner"></div>
+  <div class="send-text">Menghantar markah...</div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     SCRIPTS
+══════════════════════════════════════════════ -->
 <script src="../../js/engine.js"></script>
 <script>
 // ════════════════════════════════════════
@@ -112,7 +633,6 @@ window.GAME_CONFIG = {
   topikNama: 'Biodata Nabi Muhammad SAW',
   subjek:    'Sirah',
 
-  // TAHAP 1 (Soalan 1-5): Asas
   soalan: [
 
     // ── TAHAP 1 ──
@@ -199,26 +719,187 @@ window.GAME_CONFIG = {
   ] // end soalan
 };
 
-// ── Auto Hide Coffee During Game ──
+// ════════════════════════════════════════════════════════
+//  INISIALISASI + PATCH ENGINE
+// ════════════════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', () => {
+
   ENGINE.init();
 
-  // Hide coffee when game starts
+  // ── Sembunyikan coffee semasa game bermula ──
   const coffeeWrap = document.getElementById('coffeeWrap');
   if (coffeeWrap) coffeeWrap.style.display = 'none';
 
-  // Patch: show coffee on result screen (called inside engine)
+  // ────────────────────────────────────────────
+  //  PATCH: showFinalResult → Butang premium
+  // ────────────────────────────────────────────
   const origFinal = ENGINE.showFinalResult.bind(ENGINE);
-  ENGINE.showFinalResult = function() {
-    origFinal();
+  ENGINE.showFinalResult = function () {
+    origFinal(); // Panggil asal — render kad + bintang + breakdown
+
+    // Tunjuk coffee semula
     if (coffeeWrap) coffeeWrap.style.display = 'flex';
+
+    // Cari .final-actions yang dirender oleh origFinal
+    const finalActions = document.querySelector('.final-actions');
+    if (!finalActions) return;
+
+    const total    = this.stageMark.reduce((a, b) => a + b, 0);
+    const attempts = this.attempts;
+
+    // Kosongkan butang lama, gantikan dengan premium
+    finalActions.innerHTML = '';
+
+    // ── Butang Cuba Semula (jika < 3 percubaan) ──
+    if (attempts < 3) {
+      const btnCuba = document.createElement('button');
+      btnCuba.className = 'btn-cuba-semula';
+      btnCuba.innerHTML =
+        '<span class="cuba-icon">🔄</span>' +
+        '<span class="cuba-text">Cuba Semula' +
+          '<small>Tingkatkan markah anda!</small>' +
+        '</span>' +
+        '<span class="cuba-badge">' + attempts + '/3 percubaan</span>';
+      btnCuba.addEventListener('click', () => {
+        if (coffeeWrap) coffeeWrap.style.display = 'none';
+        ENGINE.tryAgain();
+      });
+      finalActions.appendChild(btnCuba);
+    }
+
+    // ── Butang Hantar Markah ──
+    const btnHantar = document.createElement('button');
+    btnHantar.className = 'btn-hantar-markah';
+    btnHantar.innerHTML =
+      '<span class="hantar-icon">📤</span>' +
+      '<span class="hantar-text">Hantar Markah' +
+        '<small>Simpan dalam papan ranking</small>' +
+      '</span>' +
+      '<span class="hantar-arrow">→</span>';
+    btnHantar.addEventListener('click', () => bukaModalKonfirm(total));
+    finalActions.appendChild(btnHantar);
   };
-  const origStageResult = ENGINE.showStageResult.bind(ENGINE);
-  ENGINE.showStageResult = function(mark) {
-    origStageResult(mark);
-    // Keep hidden during stage result
+
+  // ────────────────────────────────────────────
+  //  PATCH: showStageResult → kekalkan asal
+  // ────────────────────────────────────────────
+  const origStage = ENGINE.showStageResult.bind(ENGINE);
+  ENGINE.showStageResult = function (mark) {
+    origStage(mark);
+    if (coffeeWrap) coffeeWrap.style.display = 'none'; // tetap sembunyi antara tahap
   };
-});
+
+  // ════════════════════════════════════════════
+  //  MODAL 1 — PENGESAHAN HANTAR
+  // ════════════════════════════════════════════
+  const modalKonfirm     = document.getElementById('modalKonfirm');
+  const btnKonfirmYa     = document.getElementById('btnKonfirmYa');
+  const btnKonfirmTidak  = document.getElementById('btnKonfirmTidak');
+
+  // Buka modal konfirm
+  window.bukaModalKonfirm = function (total) {
+    document.getElementById('modalChipMarkah').innerHTML = total + '<sub>/ 75</sub>';
+    modalKonfirm.dataset.markah = total;
+    modalKonfirm.classList.add('show');
+  };
+
+  // Tutup — klik Batal
+  btnKonfirmTidak.addEventListener('click', () => {
+    modalKonfirm.classList.remove('show');
+  });
+
+  // Tutup — klik luar kotak modal
+  modalKonfirm.addEventListener('click', (e) => {
+    if (e.target === modalKonfirm) modalKonfirm.classList.remove('show');
+  });
+
+  // ── Klik Ya, Hantar Sekarang ──
+  btnKonfirmYa.addEventListener('click', async () => {
+    const total = parseInt(modalKonfirm.dataset.markah || '0');
+
+    // Tutup modal konfirm
+    modalKonfirm.classList.remove('show');
+
+    // Tunjuk spinner loading
+    const sendingOverlay = document.getElementById('sendingOverlay');
+    sendingOverlay.classList.add('show');
+
+    // Kunci game
+    ENGINE.lockGame();
+
+    // Bina payload data
+    const payload = {
+      nama:      ENGINE.userInfo.nama,
+      kelas:     ENGINE.userInfo.kelas,
+      markah:    total,
+      topikId:   ENGINE.userInfo.topikId,
+      topikNama: ENGINE.userInfo.topikNama,
+      subjek:    ENGINE.userInfo.subjek,
+      masa:      new Date().toLocaleDateString('ms-MY'),
+      stageMark: ENGINE.stageMark
+    };
+
+    // ── Simpan dalam localStorage (fallback) ──
+    try {
+      const localData = JSON.parse(
+        localStorage.getItem('kafa_ranking_' + payload.topikId) || '[]'
+      );
+      const idx = localData.findIndex(
+        d => d.nama === payload.nama && d.kelas === payload.kelas
+      );
+      const entry = {
+        nama:   payload.nama,
+        kelas:  payload.kelas,
+        markah: total,
+        masa:   payload.masa
+      };
+      if (idx >= 0) {
+        if (total > localData[idx].markah) localData[idx] = entry;
+      } else {
+        localData.push(entry);
+      }
+      localStorage.setItem('kafa_ranking_' + payload.topikId, JSON.stringify(localData));
+    } catch (e) { /* abaikan */ }
+
+    // ── Hantar ke Google Apps Script ──
+    try {
+      await fetch(window.GAS_URL, {
+        method:  'POST',
+        mode:    'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(payload)
+      });
+    } catch (e) { /* simpan lokal sahaja jika gagal */ }
+
+    // Sembunyikan spinner
+    sendingOverlay.classList.remove('show');
+
+    // ════════════════════════════════════════════
+    //  MODAL 2 — BERJAYA DIHANTAR
+    // ════════════════════════════════════════════
+    document.getElementById('berjayaMarkahNum').textContent = total;
+    const modalBerjaya = document.getElementById('modalBerjaya');
+    modalBerjaya.classList.add('show');
+
+    // Klik luar kotak untuk tutup (tidak redirect)
+    modalBerjaya.addEventListener('click', (e) => {
+      if (e.target === modalBerjaya) modalBerjaya.classList.remove('show');
+    });
+
+    // ── Butang Lihat Ranking → redirect ke index + tab ranking ──
+    document.getElementById('btnKeRanking').addEventListener('click', () => {
+      const params = new URLSearchParams({
+        nama:    ENGINE.userInfo.nama,
+        kelas:   ENGINE.userInfo.kelas,
+        tab:     'ranking',
+        subjek:  ENGINE.userInfo.subjek,
+        topikId: ENGINE.userInfo.topikId
+      });
+      window.location.href = '../../index.html?' + params.toString();
+    });
+  });
+
+}); // end DOMContentLoaded
 </script>
 </body>
 </html>
